@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <title>AP</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        /*body: cuerpo de la página*/
+        body { 
+        width: 100%;
+        background-color: MistyRose;
+        display: inline-block;
+        }
+    
+        /*cabecera*/
+        header { 
+        background-color:  #C71585; 
+        /*background-image: url('img/1.jpg');*/
+        width: 100%;
+        height: auto;
+        }
+    
+        header h1 { 
+        text-align: center; 
+        color: rgb(240, 224, 2535); 
+        padding: 0.5em; 
+        font-size: 3.5em; 
+        }
+    
+        header h2 { 
+        text-align: center; 
+        color: #C71585; 
+        padding: 0.5em; 
+        font-size: 2.2em; 
+        }
+    
+        hr {
+        border: 1px solid MistyRose;
+        }
+    </style>
+</head>
+
+<body>
+     <div class="container">
+        <h1><b>PHP - Backend</b></h1>
+            <h3>El alumno construirá un archivo PHP que responda con un array de objetos JSON a solicitudes tipo GET.
+                Los objetos JSON deben contener los campos: cedula, nombre, dirección, teléfono y edad
+                <br/>
+                <b>De igual manera construirá un archivo html y su respectivo JavaScript para consumir dicha información via AJAX</b>
+            </h3>
+            <button  class="mt-3 mx-auto btn btn-primary" type="button" id="Click Datos">Traer información</button>
+        <br/><br/>
+        <table class="table">
+          <thead>
+            <tr class="text-center">
+              <th>Cedula</th>
+              <th>Nombre</th>
+              <th>Apellido</th>
+              <th>Dirección</th>
+              <th>Telefono</th>
+              <th>Edad</th>
+            </tr>
+          </thead>
+          <tbody class="datos-tabla">
+                
+          </tbody>
+        </table>
+      </div>
+ 
+      <!-- jQuery library -->
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+      <!-- Popper JS -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  
+      <!-- Latest compiled JavaScript -->
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+      
+      <!-- Mi archivo js -->
+   <script>
+    var tbody = $('.datos-tabla');
+
+    $('#traer-datos').click(() => {
+        $.ajax({
+            url: 'datos.php',
+            type: 'GET',
+            dataType: 'json',
+            success: (data) => {
+            data.forEach((datos, index) => {
+            tbody.append('<tr class="text-center"><td>' + datos.Cedula + 
+              '</td> ' + '<td>' + datos.Nombre + '</td>' + '<td>'+ datos.Apellido +'</td>' '<td>' + datos.Direccion + 
+                '</td>' + '<td>' + datos.Telefono + '</td>' + '<td>' + datos.Edad + '</td></tr>');
+            });
+          },
+              error: (jqXhr, textStatus, errorMessage) => {
+              console.log(errorMessage);
+            }
+        });
+    });
+  </script>
+</body>
+
+</html>
