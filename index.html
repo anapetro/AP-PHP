@@ -47,12 +47,8 @@
 <body>
      <div class="container">
         <h1><b>PHP - Backend</b></h1>
-            <h3>El alumno construirá un archivo PHP que responda con un array de objetos JSON a solicitudes tipo GET.
-                Los objetos JSON deben contener los campos: cedula, nombre, dirección, teléfono y edad
-                <br/>
-                <b>De igual manera construirá un archivo html y su respectivo JavaScript para consumir dicha información via AJAX</b>
-            </h3>
-            <button  class="mt-3 mx-auto btn btn-primary" type="button" id="Click Datos">Traer información</button>
+           
+            <button  class="mt-3 mx-auto btn btn-primary" type="button" id="Click-Datos">Traer información</button>
         <br/><br/>
         <table class="table">
           <thead>
@@ -65,7 +61,7 @@
               <th>Edad</th>
             </tr>
           </thead>
-          <tbody class="datos-tabla">
+          <tbody class="dato-tabla">
                 
           </tbody>
         </table>
@@ -82,17 +78,17 @@
       
       <!-- Mi archivo js -->
    <script>
-    var tbody = $('.datos-tabla');
+    var tbody = $('.dato-tabla');
 
-    $('#traer-datos').click(() => {
+    $('#Click-Datos').click(() => {
         $.ajax({
-            url: 'datos.php',
+            url: 'info.php',
             type: 'GET',
             dataType: 'json',
             success: (data) => {
             data.forEach((datos, index) => {
             tbody.append('<tr class="text-center"><td>' + datos.Cedula + 
-              '</td> ' + '<td>' + datos.Nombre + '</td>' + '<td>'+ datos.Apellido +'</td>' '<td>' + datos.Direccion + 
+              '</td> ' + '<td>' + datos.Nombre + '</td>' + '<td>'+ datos.Apellido +'</td>' + '<td>' + datos.Direccion + 
                 '</td>' + '<td>' + datos.Telefono + '</td>' + '<td>' + datos.Edad + '</td></tr>');
             });
           },
